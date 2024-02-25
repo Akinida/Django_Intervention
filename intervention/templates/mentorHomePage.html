@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<!-- {{mentorDetails}} -->
+<div class="container mt-1 ">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Intervention</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="{% url 'mentormainpage' mentorDetails.mentorId %}">Home</a>
+                  {% if mode == "students" %}
+                  <a class="nav-link" href="{% url 'mentee' mentorDetails.mentorId %}">Mentee</a>
+                  {%else%}
+                  <a class="nav-link" href="{% url 'mentor' mentorDetails.mentorId %}">Students</a>
+                  {%endif%}
+
+                  
+                  
+                </div>
+            </div>
+            <div class="dropdown text-end ">
+              <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+              </a>
+              <ul class="dropdown-menu text-small">
+                
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{%url 'login'%}">Sign out</a></li>
+              </ul>
+            </div>
+        </div>
+    </nav>
+ 
+   
+    <!-- <div class="container mt-5"> -->
+      <div class="d-flex mb-5 position-relative mt-5">
+        <img style="width: 10em; height: 10em; border-radius: 50%;" src="{% static 'teacher.png' %}" class="flex-shrink-0 me-3" alt="...">
+        <div>
+          <h1 class="mt-0">Welcome back, {{mentorDetails.MentorName}}</h1>
+          <p class="m-2">AddSubject: {{mentorDetails.mentorSubject}}</p>
+          <p class="m-2">No phone: {{mentorDetails.mentorNo}}</p>
+          
+        </div>
+      </div>
+        <h1 class="display-6">Student Report</h1>
+        
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Student Id</th>
+                <th scope="col">Report Id</th>
+                <th scope="col">Report Type</th>
+                <th scope="col">Report </th>
+                <th scope="col">Date </th>
+              </tr>
+            </thead>
+            <tbody>
+            
+                {%for report in Allreport%}
+                <tr>
+                    <th>{{report.studentId_id}}</th>
+                    <td>{{report.mentorId_id}}</td>
+                    <td>{{report.reportId}}</td>
+                    <td>{{report.reportType}}</td>
+                    <td>{{report.reportProg}}</td>
+                    <td>{{report.date}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+          </table>
+      </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</html>
